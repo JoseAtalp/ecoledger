@@ -1,4 +1,4 @@
-package com.jose.refresco.dto;
+package com.jose.ecoledger.dto;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
