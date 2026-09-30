@@ -9,6 +9,9 @@ public record ConsumoEnergetico (double valorConsumo,
                                  UnidadMedida unidadMedida ,
                                  LocalDateTime fechaLectura) {
 
+    //El constructor con sus validaciones(AUTO-VALIDACION del constructor)
+    // evita que entre en las capas si hay algún problema.
+
     public ConsumoEnergetico {
         Objects.requireNonNull(unidadMedida, "Unidad de medida obligatoria");
         Objects.requireNonNull(fechaLectura, "Fecha incorrecta / La lectura es null");
