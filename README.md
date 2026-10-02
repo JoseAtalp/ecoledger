@@ -51,16 +51,16 @@ Menor uso de lineas de codigo y legibilidad.]
 **Razón:**
 [La inclusión de un id en un record de creacion, carece de sentido ya que el id 'nace' de forma autoincremental en nuestra base de datos. Se añadirá en el @Entity]
 
-## 🚧 Estado actual / Roadmap
+##  Estado actual / Roadmap
 **Terminado:**
-- ✅ DTO (Creación) ← el "contrato" de qué datos entran/salen por la API.
+-  DTO (Creación) ← el "contrato" de qué datos entran/salen por la API.
 
 **Pendiente / próximos pasos:**
-- ⬜ Entity ← el "molde" de cómo se guarda en PostgreSQL.
-- ⬜ Repository ← quién lee/escribe esa Entity en la BD.
-- ⬜ DTO(Lectura) ← el "contrato" de qué datos entran/salen por la API
-- ⬜ Service ← la lógica de negocio.
-- ⬜ Controller ← el punto de entrada HTTP .
+-  Entity ← el "molde" de cómo se guarda en PostgreSQL.
+-  Repository ← quién lee/escribe esa Entity en la BD.
+-  DTO(Lectura) ← el "contrato" de qué datos entran/salen por la API
+-  Service ← la lógica de negocio.
+-  Controller ← el punto de entrada HTTP .
 
 **Futuro / a evaluar:**
-- ⬜ Creación de un modulo anexo para la gestión de los CREDITOS DE CARBONO
+-  Creación de un modulo anexo para la gestión de los CREDITOS DE CARBONO
