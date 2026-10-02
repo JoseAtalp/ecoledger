@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:18
+    container_name: ecoledger-db
+    environment:
+      POSTGRES_DB: ecoledger
+      POSTGRES_USER: jopla
+      POSTGRES_PASSWORD: "@ecoledgerproyect2026"
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - ecoledger-data:/var/lib/postgresql
+
+volumes:
+  ecoledger-data:

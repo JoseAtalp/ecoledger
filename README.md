@@ -8,7 +8,7 @@
 ## Stack Tecnológico:
 **Back-End:**
 - Java 25 LTS 
-- Spring Boot 3
+- Spring Boot 4.1
 - Spring Data JPA
 - Spring Security(JWT)
 - PostgreSQL
