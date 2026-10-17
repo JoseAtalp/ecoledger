@@ -1,5 +1,7 @@
 package com.jose.ecoledger.dto;
 
+import com.jose.ecoledger.domain.UnidadMedida;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
