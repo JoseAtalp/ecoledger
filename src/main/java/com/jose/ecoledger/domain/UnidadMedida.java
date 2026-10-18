@@ -1,4 +1,4 @@
-package com.jose.ecoledger.dto;
+package com.jose.ecoledger.domain;
 
 public enum UnidadMedida {
     KWH,
