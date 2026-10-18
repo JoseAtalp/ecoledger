@@ -25,17 +25,15 @@
 ## Decisiones de Arquitectura "ADR" (Architecture Decision Record):
 
 ### Record vs. Lombok (@Data/@Value) para DTOs inmutables
-
 **Decisión:** 
 [Record]
 **Alternativas consideradas:** 
 [Lombok]
 **Razón:**
-[El uso Records nos dá esa inmutabildad a la hora de trabajar con DTOs. Nos aseguraba que el dato no fuera alterado durante el "viaje" o proceso.
+[El uso Records nos dá esa inmutabilidad a la hora de trabajar con DTOs. Nos aseguraba que el dato no fuera alterado durante el "viaje" o proceso.
 Menor uso de lineas de codigo y legibilidad.]
 
 ### Autovalidación en el constructor compacto del Record
-
 **Decisión:**
 [Autovalidación del record.]
 **Alternativas consideradas:**
@@ -51,16 +49,35 @@ Menor uso de lineas de codigo y legibilidad.]
 **Razón:**
 [La inclusión de un id en un record de creacion, carece de sentido ya que el id 'nace' de forma autoincremental en nuestra base de datos. Se añadirá en el @Entity]
 
+### BigDecimal para las cantidades de consumo
+**Decisión:**
+[Uso de la clase BigDecimal]
+**Alternativas consideradas:**
+[El tipo primitivo 'double']
+**Razón:**
+[La inexactitud de double a la hora de ejecutar cálculos del tipo decimal como por ejemplo (0.1 + 0.2 =  0.30000000000000004). Este resultado sería inadmisible ya que habría errores por lo que nuestra aplicación perdería credibilidad en caso de auditoria.]
+
+### EnumType.STRING para guardar la unidad de medida
+**Decisión:**
+[Uso de STRING como EnumType]
+**Alternativas consideradas:**
+[EnumType ORDINAL]
+**Razón:**
+[Con ORDINAL, si alguien añade un valor nuevo al principio del enum, cambian las posiciones de los valores existentes. Por ejemplo: los 150 kWh de "Compañía X" guardados como 0, pasarían a leerse como 150 MWh, es decir, 1000 veces más. Por lo que el informe de emisiones sería erróneo, y lo peor es que la aplicación seguiría ejecutándose sin dar ningún aviso.]
+**Nota extra:**
+[mWh = milivatio hora / MWh = megavatio hora]
+
 ##  Estado actual / Roadmap
 **Terminado:**
--  DTO (Creación) ← el "contrato" de qué datos entran/salen por la API.
+- ✅ Infraestructura ← Spring Boot 4.1 con Maven y PostgreSQL 18 en Docker.
+- ✅ DTO (Creación) ← el "contrato" de qué datos entran/salen por la API.
+- ✅ Entity ← el "molde" de cómo se guarda en PostgreSQL.
 
 **Pendiente / próximos pasos:**
--  Entity ← el "molde" de cómo se guarda en PostgreSQL.
--  Repository ← quién lee/escribe esa Entity en la BD.
--  DTO(Lectura) ← el "contrato" de qué datos entran/salen por la API
--  Service ← la lógica de negocio.
--  Controller ← el punto de entrada HTTP .
+- ⬜ Repository ← quién lee/escribe esa Entity en la BD.
+- ⬜ DTO(Lectura) ←  el "contrato" de qué datos entran/salen por la API
+- ⬜ Service ← la lógica de negocio.
+- ⬜ Controller ← el punto de entrada HTTP.
 
 **Futuro / a evaluar:**
 -  Creación de un modulo anexo para la gestión de los CREDITOS DE CARBONO
