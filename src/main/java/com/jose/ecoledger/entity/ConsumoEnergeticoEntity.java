@@ -1,6 +1,6 @@
 package com.jose.ecoledger.entity;
 
-import com.jose.ecoledger.domain.UnidadMedida; //¿ ES NECESARIO ?
+import com.jose.ecoledger.domain.UnidadMedida;
 // Un mapper es el puente que convierte una Entity en un DTO (para devolver los datos al cliente
 // sin exponer detalles internos de la base de datos) y viceversa.
 
@@ -34,7 +34,6 @@ public class ConsumoEnergeticoEntity {
     // Columna con el valor del Enum UnidadMedida.java
     // Ventaja: Es mucho más legible directamente en la base de datos y es inmune a que
     // cambies el orden de los elementos en el código Java.
-    
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private UnidadMedida unidadMedida;
@@ -42,7 +41,8 @@ public class ConsumoEnergeticoEntity {
     @Column(nullable = false)
     private LocalDateTime fechaLectura;
 
-
+    // Requerido por Hibernate para crear el objeto antes de rellenarlo por reflexión al leer de la BD.
+    // No es público para evitar que el código cree consumos vacíos (inválidos).
     protected ConsumoEnergeticoEntity(){
 
     }
