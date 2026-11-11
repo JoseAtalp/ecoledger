@@ -108,11 +108,19 @@ EcoLedger ayuda a las PYMEs a registrar sus consumos energéticos, calcular su h
 
 ### Idioma de ramas, commits y código
 **Decisión:**
-[Desde noviembre de 2026, ramas y commits en inglés siguiendo Conventional Commits. El dominio se traducirá al inglés en una rama `refactor/` dedicada. La documentación se mantiene en español.]
+[Desde noviembre de 2026, ramas y commits en inglés siguiendo Conventional Commits. El dominio se tradujo al inglés en la rama `refactor/translate-domain-to-english`: `UnidadMedida` → `MeasurementUnit`, `ConsumoEnergeticoEntity` → `EnergyConsumptionEntity` y la tabla `consumos_energeticos` → `energy_consumptions`. La documentación se mantiene en español.]
 **Alternativas consideradas:**
 [Mantener todo en español. Escribir el código nuevo en inglés sin traducir el existente.]
 **Razón:**
 [El inglés es el estándar de la industria y el idioma de las librerías del stack (`findAll`, `save`...). Hacer la traducción en una rama dedicada, mientras el proyecto es pequeño, evita mezclar idiomas en el código y mezclar el refactor con funcionalidades nuevas.]
+
+### Nombres de los DTO según su dirección
+**Decisión:**
+[Los DTO se nombran según la dirección de los datos: `...Request` para los que entran en la API (p. ej., `CreateEnergyConsumptionRequest`) y `...Response` para los que salen.]
+**Alternativas consideradas:**
+[Un único DTO con el mismo nombre que la entidad (`EnergyConsumption`).]
+**Razón:**
+[El DTO de creación no tiene `id`, porque la lectura aún no existe, y el de lectura sí lo tendrá. Son contratos distintos, y el sufijo deja claro a primera vista cuál es cada uno, además de evitar confundirlos con la entidad.]
 
 ##  Estado actual / Roadmap
 **Terminado:**
@@ -120,11 +128,11 @@ EcoLedger ayuda a las PYMEs a registrar sus consumos energéticos, calcular su h
 - ✅ DTO (Creación) ← el "contrato" de qué datos entran/salen por la API.
 - ✅ Entity ← el "molde" de cómo se guarda en PostgreSQL.
 - ✅ Credenciales ← fuera del código, en un `.env` ignorado por Git.
+- ✅ Refactor ← dominio traducido al inglés.
 
 **Pendiente / próximos pasos:**
-- ⬜ Refactor ← traducir el dominio al inglés.
 - ⬜ Repository ← quién lee/escribe esa Entity en la BD.
-- ⬜ DTO(Lectura) ←  el "contrato" de qué datos entran/salen por la API
+- ⬜ DTO (Lectura) ← `EnergyConsumptionResponse`, el "contrato" de qué datos salen por la API.
 - ⬜ Service ← la lógica de negocio.
 - ⬜ Controller ← el punto de entrada HTTP.
 
