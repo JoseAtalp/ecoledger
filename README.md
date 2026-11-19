@@ -11,7 +11,7 @@ EcoLedger ayuda a las PYMEs a registrar sus consumos energéticos, calcular su h
 - **CSRD tras la Directiva Ómnibus (UE) 2026/470**, en vigor desde el 18 de marzo de 2026: la obligación de informar solo afecta a empresas con más de 1.000 empleados **y** más de 450 millones de euros de facturación. Las PYMEs quedan fuera de la obligación directa.
 - **VSME (Voluntary Sustainability Reporting Standard for SMEs)**, elaborado por EFRAG: estándar voluntario con un módulo básico y otro ampliado. Es la referencia para las empresas fuera del ámbito de la CSRD, y el máximo de información que se les puede exigir en la cadena de valor.
 
-> ℹ️ La normativa de sostenibilidad cambia con frecuencia. Última revisión: noviembre de 2026.
+> La normativa de sostenibilidad cambia con frecuencia. Última revisión: noviembre de 2026.
 
 ## Stack Tecnológico:
 **Back-End:**
@@ -43,14 +43,14 @@ EcoLedger ayuda a las PYMEs a registrar sus consumos energéticos, calcular su h
 ```
    Copy-Item .env.example .env
 ```
-> ⚠️ Usa una contraseña larga (32+ caracteres) formada solo por letras, números, `-` y `_`. Caracteres como `'` `"` `=` `$` `#` `\` se interpretan de forma distinta en Docker Compose y en Spring Boot.
+> Usa una contraseña larga (32+ caracteres) formada solo por letras, números, `-` y `_`. Caracteres como `'` `"` `=` `$` `#` `\` se interpretan de forma distinta en Docker Compose y en Spring Boot.
 3. Levantar la base de datos:
 ```
    docker compose up -d
 ```
 4. Arrancar `EcoledgerApplication` desde IntelliJ.
 
-> ℹ️ `POSTGRES_PASSWORD` solo se aplica la primera vez que se crea el volumen `ecoledger-data`. Para cambiar la contraseña después, hay que hacerlo dentro de PostgreSQL (`\password jopla`) y actualizar el `.env`.
+> `POSTGRES_PASSWORD` solo se aplica la primera vez que se crea el volumen `ecoledger-data`. Para cambiar la contraseña después, hay que hacerlo dentro de PostgreSQL (`\password jopla`) y actualizar el `.env`.
 
 ## Decisiones de Arquitectura "ADR" (Architecture Decision Record):
 
@@ -124,17 +124,17 @@ EcoLedger ayuda a las PYMEs a registrar sus consumos energéticos, calcular su h
 
 ##  Estado actual / Roadmap
 **Terminado:**
-- ✅ Infraestructura ← Spring Boot 4.1 con Maven y PostgreSQL 18 en Docker.
-- ✅ DTO (Creación) ← el "contrato" de qué datos entran/salen por la API.
-- ✅ Entity ← el "molde" de cómo se guarda en PostgreSQL.
-- ✅ Credenciales ← fuera del código, en un `.env` ignorado por Git.
-- ✅ Refactor ← dominio traducido al inglés.
+-  Infraestructura ← Spring Boot 4.1 con Maven y PostgreSQL 18 en Docker.
+-  DTO (Creación) ← el "contrato" de qué datos entran/salen por la API.
+-  Entity ← el "molde" de cómo se guarda en PostgreSQL.
+-  Credenciales ← fuera del código, en un `.env` ignorado por Git.
+-  Refactor ← dominio traducido al inglés.
+-  Repository ← quién lee/escribe esa Entity en la BD.
 
 **Pendiente / próximos pasos:**
-- ⬜ Repository ← quién lee/escribe esa Entity en la BD.
-- ⬜ DTO (Lectura) ← `EnergyConsumptionResponse`, el "contrato" de qué datos salen por la API.
-- ⬜ Service ← la lógica de negocio.
-- ⬜ Controller ← el punto de entrada HTTP.
+-  DTO (Lectura) ← `EnergyConsumptionResponse`, el "contrato" de qué datos salen por la API.
+-  Service ← la lógica de negocio.
+-  Controller ← el punto de entrada HTTP.
 
 **Futuro / a evaluar:**
 - Creación de un modulo anexo para la gestión de los CREDITOS DE CARBONO
