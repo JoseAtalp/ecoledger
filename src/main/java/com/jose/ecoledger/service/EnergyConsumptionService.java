@@ -1,6 +1,7 @@
 package com.jose.ecoledger.service;
 
 import com.jose.ecoledger.dto.CreateEnergyConsumptionRequest;
+import com.jose.ecoledger.dto.EnergyConsumptionResponse;
 import com.jose.ecoledger.entity.EnergyConsumptionEntity;
 import com.jose.ecoledger.repository.EnergyConsumptionRepository;
 import org.springframework.stereotype.Service;
@@ -13,12 +14,17 @@ public class EnergyConsumptionService {
         this.energyConsumptionRepository = energyConsumptionRepository;
     }
 
-    public EnergyConsumptionEntity create(CreateEnergyConsumptionRequest request) {
+    public EnergyConsumptionResponse create(CreateEnergyConsumptionRequest request) {
         EnergyConsumptionEntity entity = new EnergyConsumptionEntity(
                 request.consumptionValue(),
                 request.measurementUnit(),
                 request.readingDate());
+        EnergyConsumptionEntity saved = energyConsumptionRepository.save(entity);
 
-        return energyConsumptionRepository.save(entity);
+        return new EnergyConsumptionResponse(
+                saved.getId(),
+                saved.getConsumptionValue(),
+                saved.getMeasurementUnit(),
+                saved.getReadingDate());
     }
 }
