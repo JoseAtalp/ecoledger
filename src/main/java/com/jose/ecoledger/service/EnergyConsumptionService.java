@@ -4,7 +4,9 @@ import com.jose.ecoledger.dto.CreateEnergyConsumptionRequest;
 import com.jose.ecoledger.dto.EnergyConsumptionResponse;
 import com.jose.ecoledger.entity.EnergyConsumptionEntity;
 import com.jose.ecoledger.repository.EnergyConsumptionRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,26 +26,29 @@ public class EnergyConsumptionService {
                 request.readingDate());
         EnergyConsumptionEntity saved = energyConsumptionRepository.save(entity);
 
-        return new EnergyConsumptionResponse(
-                saved.getId(),
-                saved.getConsumptionValue(),
-                saved.getMeasurementUnit(),
-                saved.getReadingDate());
+        return toResponse(saved);
     }
 
     public List<EnergyConsumptionResponse> findAll() {
         List<EnergyConsumptionEntity> entities = energyConsumptionRepository.findAll();
-
         List<EnergyConsumptionResponse> responses = new ArrayList<>();
         for (EnergyConsumptionEntity entity : entities) {
-            EnergyConsumptionResponse responseDTO = new EnergyConsumptionResponse(
-                    entity.getId(),
-                    entity.getConsumptionValue(),
-                    entity.getMeasurementUnit(),
-                    entity.getReadingDate()
-            );
-            responses.add(responseDTO);
+            responses.add(toResponse(entity));
         }
         return responses;
+    }
+
+    public EnergyConsumptionResponse findById(Long id) {
+        EnergyConsumptionEntity entity = energyConsumptionRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Energy consumption " + id + " not found"));
+        return toResponse(entity);
+    }
+
+    private EnergyConsumptionResponse toResponse(EnergyConsumptionEntity entity) {
+        return new EnergyConsumptionResponse(
+                entity.getId(),
+                entity.getConsumptionValue(),
+                entity.getMeasurementUnit(),
+                entity.getReadingDate());
     }
 }

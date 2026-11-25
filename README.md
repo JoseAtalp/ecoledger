@@ -120,21 +120,26 @@ EcoLedger ayuda a las PYMEs a registrar sus consumos energéticos, calcular su h
 **Alternativas consideradas:**
 [Un único DTO con el mismo nombre que la entidad (`EnergyConsumption`).]
 **Razón:**
-[El DTO de creación no tiene `id`, porque la lectura aún no existe, y el de lectura sí lo tendrá. Son contratos distintos, y el sufijo deja claro a primera vista cuál es cada uno, además de evitar confundirlos con la entidad.]
+[El DTO de creación no tiene `id` y el de lectura sí. Son contratos distintos, y el sufijo deja claro a primera vista cuál es cada uno, además de evitar confundirlos con la entidad.]
 
-##  Estado actual / Roadmap
+## Estado actual / Roadmap
 **Terminado:**
--  Infraestructura ← Spring Boot 4.1 con Maven y PostgreSQL 18 en Docker.
--  DTO (Creación) ← el "contrato" de qué datos entran/salen por la API.
--  Entity ← el "molde" de cómo se guarda en PostgreSQL.
--  Credenciales ← fuera del código, en un `.env` ignorado por Git.
--  Refactor ← dominio traducido al inglés.
--  Repository ← quién lee/escribe esa Entity en la BD.
+- Infraestructura ← Spring Boot 4.1 con Maven y PostgreSQL 18 en Docker.
+- DTO (Creación) ← el "contrato" de qué datos entran/salen por la API.
+- Entity ← el "molde" de cómo se guarda en PostgreSQL.
+- Credenciales ← fuera del código, en un `.env` ignorado por Git.
+- Refactor ← dominio traducido al inglés.
+- Repository ← quién lee/escribe esa Entity en la BD.
+- DTO (Lectura) ← `EnergyConsumptionResponse`, el "contrato" de qué datos salen por la API.
+- Service ← la lógica de negocio.
+- Controller ← el punto de entrada HTTP.
 
 **Pendiente / próximos pasos:**
--  DTO (Lectura) ← `EnergyConsumptionResponse`, el "contrato" de qué datos salen por la API.
--  Service ← la lógica de negocio.
--  Controller ← el punto de entrada HTTP.
+- GET /api/energy-consumptions/{id}, para buscar un consumo concreto
+- Códigos HTTP correctos: 201 al crear y 404 si no existe
+- Errores claros para el cliente (manejador global de excepciones)
+- Tests automáticos
+- Empresas, cálculo de CO₂ y seguridad con JWT
 
 **Futuro / a evaluar:**
 - Creación de un modulo anexo para la gestión de los CREDITOS DE CARBONO
